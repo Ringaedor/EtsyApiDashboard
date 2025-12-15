@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Gestione Ordini - Etsy Shop Manager{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Ordini da Spedire</h1>
+        <a href="/">Torna alla Dashboard</a>
+    </header>
+
+    {% if receipts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Ordine</th>
+                    <th>Acquirente</th>
+                    <th>Totale</th>
+                    <th>Data</th>
+                    <th>Azione</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for receipt in receipts %}
+                <tr>
+                    <td>{{ receipt.receipt_id }}</td>
+                    <td>{{ receipt.name }}</td>
+                    <td>{{ receipt.grandtotal.amount / receipt.grandtotal.divisor }} {{ receipt.grandtotal.currency_code }}</td>
+                    <td>{{ receipt.created_date }}</td>
+                    <td>
+                        <form action="{{ url_for('mark_as_shipped', receipt_id=receipt.receipt_id) }}" method="POST">
+                            <button type="submit" class="btn btn-primary">Segna come Spedito</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nessun ordine da spedire al momento!</p>
+    {% endif %}
+{% endblock %}

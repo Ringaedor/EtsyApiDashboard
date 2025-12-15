@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Etsy Shop Manager{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Dashboard per: {{ shop.shop_name }}</h1>
+        <a href="/logout">Logout</a>
+    </header>
+
+    <h2>Statistiche del Negozio</h2>
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <h3>Inserzioni Attive</h3>
+            <p>{{ shop.listing_active_count }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Vendite Totali</h3>
+            <p>{{ shop.transaction_sold_count }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Recensioni</h3>
+            <p>{{ shop.review_count }}</p>
+        </div>
+    </div>
+
+    <div class="dashboard-grid mt-2">
+        <a href="/orders" class="stat-card card-link">
+            <h3>Gestisci Ordini</h3>
+            <p style="font-size: 1.2em;">Visualizza e aggiorna gli ordini da spedire</p>
+        </a>
+        <a href="/listings" class="stat-card card-link">
+            <h3>Gestisci Inserzioni</h3>
+            <p style="font-size: 1.2em;">Modifica prezzo e quantità delle inserzioni attive</p>
+        </a>
+    </div>
+{% endblock %}
